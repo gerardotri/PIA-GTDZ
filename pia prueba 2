@@ -1,0 +1,122 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Juegos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .contenedor {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .producto {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            width: 200px;
+        }
+        .producto img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .boton {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .boton:hover {
+            background-color: #218838;
+        }
+        #carrito {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: none;
+        }
+        #finalizar {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #finalizar:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tienda de Tennis</h1>
+    <div class="contenedor">
+        <div class="producto">
+            <img src="c:\Users\Gerardo Dávila Leal\Pictures\Screenshots\zelda.jpg">
+            <h3>Timberlands boots</h3>
+            <p>Precio: $4200</p>
+            <button class="boton" onclick="agregarAlCarrito('Timberlands boots', 4200)">Comprar</button>
+        </div>
+        <div class="producto">
+            <img src="c:\Users\Gerardo Dávila Leal\Pictures\Screenshots\red dead.jpg">
+            <h3>Anthony Edwards 1 low</h3>
+            <p>Precio: $3,999</p>
+            <button class="boton" onclick="agregarAlCarrito('Anthony Edwards 1 low', 3,999)">Comprar</button>
+        </div>
+        <div class="producto">
+            <img src="c:\Users\Gerardo Dávila Leal\Pictures\Screenshots\the last of us.jpg" alt="The Last of Us Part II">
+            <h3>Asics Gel Kayano</h3>
+            <p>Precio: $3,999</p>
+            <button class="boton" onclick="agregarAlCarrito('Asics GEL-KAYANO', 3,999)">Comprar</button>
+        </div>
+    </div>
+    
+    <div id="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="listaCarrito"></ul>
+        <p>Total: $<span id="total">0</span></p>
+        <button id="finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+    </div>
+    
+    <script>
+        let carrito = [];
+        let total = 0;
+
+        function agregarAlCarrito(nombre, precio) {
+            carrito.push({ nombre, precio });
+            total += precio;
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const lista = document.getElementById("listaCarrito");
+            lista.innerHTML = "";
+            carrito.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = `${item.nombre} - $${item.precio}`;
+                lista.appendChild(li);
+            });
+            document.getElementById("total").textContent = total;
+            document.getElementById("carrito").style.display = "block";
+        }
+
+        function finalizarCompra() {
+            alert("Compra realizada con éxito!");
+            carrito = [];
+            total = 0;
+            actualizarCarrito();
+            document.getElementById("carrito").style.display = "none";
+        }
+    </script>
+</body>
+</html>
